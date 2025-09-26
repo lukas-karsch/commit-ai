@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pnpm tsx src/index.ts",
+    "build": "tsc --noEmit",
+    "check-types": "tsc",
     "format:check": "pnpm exec prettier . --check",
     "format:write": "pnpm exec prettier . --write"
   },
