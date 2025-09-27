@@ -1,6 +1,7 @@
 import { generateObject, LanguageModel } from "ai";
 import { commitTextSchema } from "./schema.js";
 import { CommitAiOptions } from "../repo/get-options.js";
+import { buildPrompt } from "./prompt-builder.js";
 
 export const generateCommitMessage = async (
   model: LanguageModel,
@@ -9,7 +10,7 @@ export const generateCommitMessage = async (
 ) => {
   const { object } = await generateObject({
     model,
-    prompt: `You are a professional developer. Your task is to write a short and precise commit message based on the following git diff: ${diff}`,
+    prompt: buildPrompt(diff, options),
     schema: commitTextSchema,
   });
 
