@@ -2,12 +2,12 @@ import { readdirSync, lstatSync, existsSync } from "node:fs";
 import { basename } from "node:path";
 import { isFileIgnored } from "../repo/ignored.js";
 
-type FileNode = {
+export type FileNode = {
   name: string;
   type: "file";
 };
 
-type DirectoryNode = {
+export type DirectoryNode = {
   name: string;
   type: "directory";
   children: Node[];

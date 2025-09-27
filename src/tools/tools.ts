@@ -1,6 +1,6 @@
 import { tool } from "ai";
 import z from "zod";
-import { getDirectoryStructure } from "./get-context.js";
+import { getDirectoryStructure } from "../fs/get-directory-structure.js";
 import { getCwd } from "../fs/cwd.js";
 import { readFileToText } from "../fs/read-file.js";
 
