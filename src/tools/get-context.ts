@@ -1,5 +1,5 @@
-import { readdirSync, lstatSync, existsSync, readFileSync } from "node:fs";
-import { basename, dirname } from "node:path";
+import { readdirSync, lstatSync, existsSync } from "node:fs";
+import { basename } from "node:path";
 import { isFileIgnored } from "../repo/ignored.js";
 import { getCwd } from "../fs/cwd.js";
 
@@ -27,11 +27,10 @@ export function getDirectoryStructure(path: string): Node {
     type: "directory",
     name: basename(path),
     children: readdirSync(path)
-      .filter((p) => existsSync(`${path}/${p}`))
-      .filter((p) => !isFileIgnored(`${path}/${p}`))
       .filter((p) => !p.startsWith(".git"))
-      .map((p) => getDirectoryStructure(`${path}/${p}`)),
+      .map((p) => `${path}/${p}`)
+      .filter(existsSync)
+      .filter((p) => !isFileIgnored(p))
+      .map(getDirectoryStructure),
   };
 }
-
-console.dir(getDirectoryStructure(getCwd()), { depth: 5 });
