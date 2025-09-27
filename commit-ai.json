@@ -1,0 +1,4 @@
+{
+  "useReadme": false,
+  "customInstructions": "Use conventional commits. Use elements like 'feat', 'fix', 'chore', 'test', 'style', 'refactor'. "
+}

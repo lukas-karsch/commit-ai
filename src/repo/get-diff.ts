@@ -1,5 +1,5 @@
 import { spawnSync } from "child_process";
-import { GitError } from "./error.js";
+import { GitError } from "./git-error.js";
 
 export const getGitDiff = (cwd?: string) => {
   const options = cwd ? { cwd } : {};
@@ -9,7 +9,7 @@ export const getGitDiff = (cwd?: string) => {
     ...options,
   });
 
-  if (stderr) {
+  if (!stdout) {
     throw new GitError(stderr.toString());
   }
 

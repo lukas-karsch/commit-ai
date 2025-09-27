@@ -1,13 +1,16 @@
-import { claude } from "./model/claude";
 import { generateText } from "ai";
+import { claude } from "./model/claude.js";
+import { getGitDiff } from "./repo/get-diff.js";
+import { getOptions } from "./repo/get-options.js";
+import { generateCommitMessage } from "./generation/generate-commit-message.js";
 
 async function main() {
-  const { text } = await generateText({
-    model: claude,
-    prompt: "Write 5 words about typescript.",
-  });
+  const diffString = getGitDiff();
+  const options = getOptions();
 
-  console.log(text);
+  const result = await generateCommitMessage(claude, diffString, options);
+
+  console.log(result);
 }
 
 main().catch((e) => {
