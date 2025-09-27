@@ -1,7 +1,6 @@
 import { readdirSync, lstatSync, existsSync } from "node:fs";
 import { basename } from "node:path";
 import { isFileIgnored } from "../repo/ignored.js";
-import { getCwd } from "../fs/cwd.js";
 
 type FileNode = {
   name: string;
