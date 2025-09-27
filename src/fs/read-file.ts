@@ -1,5 +1,5 @@
-import { PathLike, readFileSync } from "node:fs";
+import { PathLike, readFile, readFileSync } from "node:fs";
 
-export const readFileToJson = (path: PathLike) => {
-  return readFileSync(path).toJSON();
-};
+export const readFileToJson = (path: PathLike) => readFileSync(path).toJSON();
+
+export const readFileToText = (path: PathLike) => readFileSync(path).toString();
