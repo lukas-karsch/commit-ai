@@ -30,7 +30,5 @@ export const buildPrompt = (options: CommitAiOptions, cwd: string): string => {
     prompt += JSON.stringify(changedFileContents, null, 2);
   }
 
-  console.log(prompt);
-
   return prompt;
 };
