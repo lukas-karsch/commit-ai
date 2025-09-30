@@ -1,12 +1,19 @@
 import { readFileToText } from "../fs/read-file.js";
 import { getChangedFiles, getGitDiff } from "../repo/get-diff.js";
 import { CommitAiOptions } from "../repo/get-options.js";
+import { getReadme } from "../repo/get-readme.js";
 
 export const buildPrompt = (options: CommitAiOptions, cwd: string): string => {
   let prompt = `You are a professional developer. Your task is to write a short and precise commit message.\n`;
 
   if (options.customInstructions) {
     prompt += `Follow the custom instructions provided by the user: ${options.customInstructions}\n`;
+  }
+
+  if (options.useReadme) {
+    prompt +=
+      "Below is the projects' README.md file. Use any information from the README if it is related to the changes made in this commit.";
+    prompt += getReadme(cwd);
   }
 
   const diff = getGitDiff();
