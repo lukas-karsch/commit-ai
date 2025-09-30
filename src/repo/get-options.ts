@@ -7,6 +7,7 @@ import { readFileToJson } from "../fs/read-file.js";
 export const optionsSchema = z.object({
   useReadme: z.boolean().default(false),
   customInstructions: z.string().default(""),
+  readFullChangedFiles: z.boolean().default(false),
 });
 
 export type CommitAiOptions = z.output<typeof optionsSchema>;

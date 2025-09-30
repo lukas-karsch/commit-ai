@@ -5,12 +5,12 @@ import { buildPrompt } from "./prompt-builder.js";
 
 export const generateCommitMessage = async (
   model: LanguageModel,
-  diff: string,
   options: CommitAiOptions,
+  cwd: string,
 ) => {
   const { object } = await generateObject({
     model,
-    prompt: buildPrompt(diff, options),
+    prompt: buildPrompt(options, cwd),
     schema: commitTextSchema,
   });
 
