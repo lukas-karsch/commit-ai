@@ -12,6 +12,11 @@ async function main() {
   const cwd = process.cwd();
   const options = getOptions(cwd);
 
+  const interval = setInterval(
+    () => console.log(chalk.gray("still waiting...")),
+    2000,
+  );
+
   try {
     const result = await generateCommitMessage(claude, options, cwd);
 
@@ -21,6 +26,8 @@ async function main() {
   } catch (error) {
     console.error(chalk.red("sorry!! something went wrong :("));
     console.error(error);
+  } finally {
+    clearInterval(interval);
   }
 }
 
