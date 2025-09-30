@@ -1,6 +1,7 @@
 import { PathLike, readFile, readFileSync } from "node:fs";
 
-export const readFileToJson = (path: PathLike) => readFileSync(path).toJSON();
+export const readFileToJson = (path: PathLike) =>
+  JSON.parse(readFileSync(path).toString());
 
 /**
  * Read a file synchronously to a string.

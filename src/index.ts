@@ -3,8 +3,8 @@ import { getOptions } from "./repo/get-options.js";
 import { generateCommitMessage } from "./generation/generate-commit-message.js";
 
 async function main() {
-  const options = getOptions();
   const cwd = process.cwd();
+  const options = getOptions(cwd);
 
   const result = await generateCommitMessage(claude, options, cwd);
 

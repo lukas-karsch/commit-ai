@@ -14,7 +14,9 @@ export type CommitAiOptions = z.output<typeof optionsSchema>;
 
 export const getOptions = (cwd?: string): CommitAiOptions => {
   const basename = "commit-ai.json";
-  const filepath = cwd ? `${path.dirname(cwd)}/${basename}` : basename;
+  const filepath = cwd ? path.join(cwd, basename) : basename;
+
+  console.log({ filepath });
 
   const data = readFileToJson(filepath);
 
