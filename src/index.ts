@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { claude } from "./model/claude.js";
 import { getOptions } from "./repo/get-options.js";
 import { generateCommitMessage } from "./generation/generate-commit-message.js";
