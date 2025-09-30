@@ -16,8 +16,6 @@ export const getOptions = (cwd?: string): CommitAiOptions => {
   const basename = "commit-ai.json";
   const filepath = cwd ? path.join(cwd, basename) : basename;
 
-  console.log({ filepath });
-
   const data = readFileToJson(filepath);
 
   return optionsSchema.parse(data);
