@@ -12,11 +12,16 @@ async function main() {
   const cwd = process.cwd();
   const options = getOptions(cwd);
 
-  const result = await generateCommitMessage(claude, options, cwd);
+  try {
+    const result = await generateCommitMessage(claude, options, cwd);
 
-  console.log(chalk.gray("your commit message is here!"));
-  console.log();
-  console.log(chalk.green(result.commitMessage));
+    console.log(chalk.gray("your commit message is here!"));
+    console.log();
+    console.log(chalk.green(result.commitMessage));
+  } catch (error) {
+    console.error(chalk.red("sorry!! something went wrong :("));
+    console.error(error);
+  }
 }
 
 main().catch((e) => {
