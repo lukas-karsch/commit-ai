@@ -4,7 +4,7 @@ import { CommitAiOptions } from "../repo/get-options.js";
 import { getReadme } from "../repo/get-readme.js";
 
 export const buildPrompt = (options: CommitAiOptions, cwd: string): string => {
-  let prompt = `You are a professional developer. Your task is to write a short and precise commit message.\n`;
+  let prompt = `You are a professional developer called "commit-ai". Your task is to write a short and precise commit message. You will be run inside of a git repository.\n`;
 
   if (options.customInstructions) {
     prompt += `Follow the custom instructions provided by the user: ${options.customInstructions}\n`;
