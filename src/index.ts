@@ -18,11 +18,7 @@ async function main() {
   );
 
   try {
-    const result = await generateCommitMessage(claude, options, cwd);
-
-    console.log(chalk.gray("your commit message is here!"));
-    console.log();
-    console.log(chalk.green(result.commitMessage));
+    await generateCommitMessage(claude, options, cwd);
   } catch (error) {
     console.error(chalk.red("sorry!! something went wrong :("));
     console.error(error);
