@@ -1,16 +1,22 @@
 import { spawnSync } from "child_process";
 import { GitError } from "./git-error.js";
 
-export const getGitDiff = (cwd?: string) => {
+export const getGitDiff = (cwd?: string, stagedFiles = false): string => {
   const options = cwd ? { cwd } : {};
 
-  const { stdout, stderr } = spawnSync("git", ["diff"], {
+  const args = stagedFiles ? ["diff", "--staged"] : ["diff"];
+
+  const { stdout, stderr, status } = spawnSync("git", args, {
     encoding: "utf8",
     ...options,
   });
 
-  if (!stdout) {
-    throw new GitError(stderr.toString());
+  if (status !== 0) {
+    throw new GitError(stderr.toString(), status ?? -1);
+  }
+
+  if (stdout.trim() === "" && !stagedFiles) {
+    return getGitDiff(cwd, true);
   }
 
   return stdout.toString();
@@ -19,13 +25,13 @@ export const getGitDiff = (cwd?: string) => {
 export const getChangedFiles = (cwd?: string): string[] => {
   const options = cwd ? { cwd } : {};
 
-  const { stdout, stderr } = spawnSync("git", ["diff", "--name-only"], {
+  const { stdout, stderr, status } = spawnSync("git", ["diff", "--name-only"], {
     encoding: "utf8",
     ...options,
   });
 
-  if (!stdout) {
-    throw new GitError(stderr.toString());
+  if (status !== 0) {
+    throw new GitError(stderr.toString(), status ?? -1);
   }
 
   return stdout
